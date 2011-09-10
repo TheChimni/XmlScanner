@@ -9,7 +9,7 @@ namespace XmlScannerApp.Models
 	{
 		public PostalAddressResult Read()
 		{
-			var result = new PostalAddressResult();
+			var result = new PostalAddressResult() { IsDocumentValid = true };
 			return result;
 		}
 	}
