@@ -62,6 +62,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\PostalAddress.cs" />
+    <Compile Include="Models\PostalAddressReader.cs" />
+    <Compile Include="Models\PostalAddressResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

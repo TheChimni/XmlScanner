@@ -13,6 +13,13 @@ namespace XmlScannerApp.Tests
 	public class XmlSerialisation
 	{
 		[Test]
+		public void ReadValidPostalAddress()
+		{
+			var reader = new PostalAddressReader();
+			Assert.IsNotNull(reader.Read());
+		}
+
+		//[Test]
 		public void TemporaryTestToGenerateSampleXmlDocument()
 		{
 			var postalAddress = new PostalAddress();
