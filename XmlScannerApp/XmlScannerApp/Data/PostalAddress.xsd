@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:PostalAddress-schema" targetNamespace="urn:PostalAddress-schema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.4">
+	<xs:element name="PostalAddress">
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element name="PostalAddressRow" type="PostalAddressRecord"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="PostalAddressRecord">
+		<xs:annotation>
+			<xs:documentation>Single row of PostalAddress data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="address1" type="xs:string"/>
+			<xs:element name="address2" type="xs:string"/>
+			<xs:element name="address3" type="xs:string"/>
+			<xs:element name="city" type="xs:string"/>
+			<xs:element name="postcode" type="xs:string"/>
+			<xs:element name="country" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

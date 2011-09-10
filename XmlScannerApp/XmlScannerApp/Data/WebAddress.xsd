@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:WebAddress-schema" targetNamespace="urn:WebAddress-schema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.4">
+	<xs:element name="WebAddress">
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element name="WebAddressRow" type="WebAddressRecord"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="WebAddressRecord">
+		<xs:annotation>
+			<xs:documentation>Single row of WebAddress data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="url" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="favicon" type="xs:string"/>
+			<xs:element name="tags" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
