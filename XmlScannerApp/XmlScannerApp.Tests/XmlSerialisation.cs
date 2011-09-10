@@ -49,6 +49,7 @@ namespace XmlScannerApp.Tests
 			}
 		}
 
+		//[Test]
 		public void GenerateInValidSampleXmlDocumentDoesNotMatchXsd()
 		{
 			var postalAddress = new PostalAddress();

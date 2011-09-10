@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace XmlScannerApp.Models
 {
@@ -10,11 +12,36 @@ namespace XmlScannerApp.Models
 	{
 		public PostalAddressResult Read(string path)
 		{
-			using (var fileStream = new FileStream(path, FileMode.Open))
+			using (var xmlReader = new XmlTextReader(path))
 			{
-				var result = new PostalAddressResult() { IsDocumentValid = true };
-				return result;
+				var settings = new XmlReaderSettings { ValidationType = ValidationType.Schema };
+				settings.Schemas.Add("urn:PostalAddress-schema",
+					@"C:\Users\Reeithaa\Documents\Visual Studio 2010\Projects\XMLScanner\XmlScannerApp\XmlScannerApp\Data\PostalAddress.xsd");
+				using (var xmlValidatingReader = XmlReader.Create(xmlReader, settings))
+				{
+					var serializer = new XmlSerializer(typeof(PostalAddress));
+					try
+					{
+						while (xmlValidatingReader.Read())
+						{
+							//try
+							//{
+							//    var postalAddress = (PostalAddress)serializer.Deserialize(xmlValidatingReader);
+							//}
+							//catch
+							//{
+
+							//}
+						}
+					}
+					catch
+					{
+						return new PostalAddressResult() { IsDocumentValid = false };
+					}
+				}
+				//return new PostalAddressResult() { IsDocumentValid = true };
 			}
-		}
+			return new PostalAddressResult() { IsDocumentValid = true };
+		}		
 	}
 }
