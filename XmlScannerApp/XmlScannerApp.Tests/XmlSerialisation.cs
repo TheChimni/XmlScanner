@@ -16,7 +16,7 @@ namespace XmlScannerApp.Tests
 		public void ReadValidPostalAddress()
 		{
 			var reader = new PostalAddressReader();
-			var result = reader.Read();
+			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressSample1.xml");
 			Assert.IsNotNull(result);
 			Assert.IsTrue(result.IsDocumentValid);
 		}
@@ -25,13 +25,13 @@ namespace XmlScannerApp.Tests
 		public void ReadInvalidPostalAddress()
 		{
 			var reader = new PostalAddressReader();
-			var result = reader.Read();
+			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressSample2.xml");
 			Assert.IsNotNull(result);
 			Assert.IsFalse(result.IsDocumentValid);
 		}
 
 		//[Test]
-		public void TemporaryTestToGenerateSampleXmlDocument()
+		public void GenerateValidSampleXmlDocument()
 		{
 			var postalAddress = new PostalAddress();
 			postalAddress.PostalAddresses = new[]
@@ -44,6 +44,24 @@ namespace XmlScannerApp.Tests
 
 			var serializer = new XmlSerializer(typeof(PostalAddress));
 			using (var fileStream = new FileStream(@"..\..\..\XmlScannerApp\Data\PostalAddressSample1.xml", FileMode.Create))
+			{
+				serializer.Serialize(fileStream, postalAddress);
+			}
+		}
+
+		public void GenerateInValidSampleXmlDocumentDoesNotMatchXsd()
+		{
+			var postalAddress = new PostalAddress();
+			postalAddress.PostalAddresses = new[]
+			{
+				new PostalAddressRecord { Address1 ="No. 10", Address2 = "Downing Street", 
+					City = "London", Country = "UK"},
+ 				new PostalAddressRecord { Address1 = "Andrews House" , Address2 = "College Road", Address3 = "", 
+					City = "Guildford", Country = "UK", PostCode = "GU1 4QB" }
+			};
+
+			var serializer = new XmlSerializer(typeof(PostalAddress));
+			using (var fileStream = new FileStream(@"..\..\..\XmlScannerApp\Data\PostalAddressSample2.xml", FileMode.Create))
 			{
 				serializer.Serialize(fileStream, postalAddress);
 			}

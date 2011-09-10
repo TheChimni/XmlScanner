@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PostalAddress xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:PostalAddress-schema">
+  <PostalAddressRow>
+    <address1>No. 10</address1>
+    <address2>Downing Street</address2>
+    <city>London</city>
+    <country>UK</country>
+  </PostalAddressRow>
+  <PostalAddressRow>
+    <address1>Andrews House</address1>
+    <address2>College Road</address2>
+    <address3 />
+    <city>Guildford</city>
+    <postcode>GU1 4QB</postcode>
+    <country>UK</country>
+  </PostalAddressRow>
+</PostalAddress>
