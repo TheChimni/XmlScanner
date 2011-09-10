@@ -21,6 +21,15 @@ namespace XmlScannerApp.Tests
 			Assert.IsTrue(result.IsDocumentValid);
 		}
 
+		[Test]
+		public void ReadInvalidPostalAddress()
+		{
+			var reader = new PostalAddressReader();
+			var result = reader.Read();
+			Assert.IsNotNull(result);
+			Assert.IsFalse(result.IsDocumentValid);
+		}
+
 		//[Test]
 		public void TemporaryTestToGenerateSampleXmlDocument()
 		{
