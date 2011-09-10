@@ -9,7 +9,8 @@ namespace XmlScannerApp.Models
 	{
 		public PostalAddressResult Read()
 		{
-			return null;
+			var result = new PostalAddressResult();
+			return result;
 		}
 	}
 }
