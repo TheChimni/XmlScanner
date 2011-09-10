@@ -7,5 +7,6 @@ namespace XmlScannerApp.Models
 {
 	public class PostalAddressResult
 	{
+		public bool IsDocumentValid { get; set; }
 	}
 }
