@@ -5,6 +5,7 @@ using System.Web;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using XmlScannerApp.Models;
 
 namespace XmlScannerApp.Models
 {
@@ -12,6 +13,7 @@ namespace XmlScannerApp.Models
 	{
 		public PostalAddressResult Read(string path)
 		{
+			var result = new PostalAddressResult();
 			using (var xmlReader = new XmlTextReader(path))
 			{
 				var settings = new XmlReaderSettings { ValidationType = ValidationType.Schema };
@@ -20,17 +22,28 @@ namespace XmlScannerApp.Models
 				using (var xmlValidatingReader = XmlReader.Create(xmlReader, settings))
 				{
 					var serializer = new XmlSerializer(typeof(PostalAddress));
+					PostalAddress postalAddress = null;
 					try
 					{
-						var postalAddress = (PostalAddress)serializer.Deserialize(xmlValidatingReader);
+						postalAddress = (PostalAddress)serializer.Deserialize(xmlValidatingReader);
+						//var address1Tag =  postalAddress != null && postalAddress.PostalAddresses.Count() > 0 
+						//    ? postalAddress.PostalAddresses.each
 					}
 					catch
 					{
-						return new PostalAddressResult() { IsDocumentValid = false };
+						return result;
 					}
+					result.IsDocumentValid = true;
+					// TODO: errors
+					DetectErrors(postalAddress, result);
+					// warnings
 				}
 			}
-			return new PostalAddressResult() { IsDocumentValid = true };
+			return result;
+		}
+
+		private void DetectErrors(PostalAddress postalAddress, PostalAddressResult result)
+		{
 		}		
 	}
 }

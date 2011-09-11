@@ -62,6 +62,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\ExtensionMethods.cs" />
     <Compile Include="Models\PostalAddress.cs" />
     <Compile Include="Models\PostalAddressReader.cs" />
     <Compile Include="Models\PostalAddressResult.cs" />
