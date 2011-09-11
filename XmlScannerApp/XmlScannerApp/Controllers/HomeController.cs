@@ -13,28 +13,36 @@ namespace XmlScannerApp.Controllers
 		//
 		// GET: /Home/
 
-		public ActionResult Index()
+		public ActionResult Index(string id)
 		{
-			var reader = new PostalAddressReader(Server.MapPath("Data"));
+			var reader = new PostalAddressReader(Server.MapPath(@"~/Data"));
 			var fileNames = reader.GetFileNames();
 			var selectList = new SelectList(fileNames);
 			var viewModel = new IndexViewModel() { SampleFiles = selectList };
+			if (!string.IsNullOrEmpty(id))
+			{
+				var result = reader.Read(id);
+				viewModel.SelectedSampleFile = id;
+				viewModel.SummaryMessage = result.SummaryMessage;
+			}
 			return View(viewModel);
 		}
 
 		[HttpPost]
 		public ActionResult Index(IndexViewModel model)
 		{
-			var reader = new PostalAddressReader(Server.MapPath("Data"));
-			var fileNames = reader.GetFileNames();
-			var selectList = new SelectList(fileNames);
-			var viewModel = new IndexViewModel() { SampleFiles = selectList };
 			if (ModelState.IsValid)
 			{
-				var result = reader.Read(model.SelectedSampleFile);
-				viewModel.SummaryMessage = result.SummaryMessage;
+				return RedirectToAction("Index", "Home", new { id = model.SelectedSampleFile });
 			}
-			return View(viewModel);
+			else
+			{
+				var reader = new PostalAddressReader(Server.MapPath(@"~/Data"));
+				var fileNames = reader.GetFileNames();
+				var selectList = new SelectList(fileNames);
+				var viewModel = new IndexViewModel() { SampleFiles = selectList, SelectedSampleFile = model.SelectedSampleFile };
+				return View(viewModel);
+			}
 		}
 	}
 }
