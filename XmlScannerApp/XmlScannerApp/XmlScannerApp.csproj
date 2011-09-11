@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Data\PostalAddressInvalidSample1.xml" />
     <Content Include="Data\PostalAddressValidSample1.xml" />
+    <Content Include="Data\PostalAddressWithAddress1AndPostCodeEmpty.xml" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\jquery-ui.css" />
