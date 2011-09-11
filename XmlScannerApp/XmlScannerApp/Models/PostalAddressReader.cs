@@ -6,6 +6,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using XmlScannerApp.Models;
+using System.Configuration;
 
 namespace XmlScannerApp.Models
 {
@@ -46,16 +47,30 @@ namespace XmlScannerApp.Models
 
 		private void DetectWarnings(PostalAddress postalAddress, PostalAddressResult result)
 		{
+			var countryList = ConfigurationManager.AppSettings.Get("CountryList") ?? "England,France,Germany,Japan,United States";
+			var permittedCountries = countryList.Split(new[] { ',' });
 			foreach (var address in postalAddress.PostalAddresses)
 			{
 				string tag = null;
+				Warning warning = null;
 				if (string.IsNullOrEmpty(address.City))
 				{
 					tag = "<city/>";
-				}			
-				if (tag != null)
+					warning = new Warning() { Message = string.Format("The {0} tag is empty", tag), Tag = tag };
+					
+				}
+				else if(!permittedCountries.Contains(address.Country))
 				{
-					var warning = new Warning() { Message = string.Format("The {0} tag is empty", tag), Tag = tag };
+					tag = "<country/>";
+					warning = new Warning() 
+					{ 
+						Message = string.Format("{0} isn't within permitted set of countries",
+						address.Country.Trim()),
+						Tag = tag
+					};
+				}
+				if (warning != null)
+				{
 					result.AddWarning(warning);
 				}
 			}

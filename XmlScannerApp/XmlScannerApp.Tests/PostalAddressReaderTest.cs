@@ -58,6 +58,7 @@ namespace XmlScannerApp.Tests
 			Assert.IsTrue(result.ExceedsErrorThreshold);
 			Assert.AreEqual("Scan aborted as more than 10% of records are errored", result.SummaryMessage);
 		}
+
 		[Test]
 		public void ReadPostalAddressWithEmptyCityTag()
 		{
@@ -65,6 +66,16 @@ namespace XmlScannerApp.Tests
 			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithCityEmpty.xml");
 			Assert.AreEqual(2, result.Warnings.Count());
 		}
+
+		[Test]
+		public void ReadPostalAddressWhereCountryIsNotSupported()
+		{
+			var reader = new PostalAddressReader();
+			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithUnknownCountry.xml");
+			Assert.AreEqual(1, result.Warnings.Count());
+			Assert.AreEqual("UK isn't within permitted set of countries", result.Warnings.First().Message);
+		}
+
 		//[Test]
 		public void GenerateValidSampleXmlDocument()
 		{

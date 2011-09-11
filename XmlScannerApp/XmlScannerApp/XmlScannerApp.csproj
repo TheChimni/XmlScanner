@@ -76,6 +76,7 @@
     <Content Include="Data\PostalAddressWithCityEmpty.xml" />
     <Content Include="Data\PostalAddressWithMoreThan10PercentErrors.xml" />
     <Content Include="Data\PostalAddressWithPostcodeEmpty.xml" />
+    <Content Include="Data\PostalAddressWithUnknownCountry.xml" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\jquery-ui.css" />
