@@ -63,7 +63,7 @@ namespace XmlScannerApp.Tests
 		{
 			var reader = new PostalAddressReader();
 			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithCityEmpty.xml");
-			Assert.AreEqual(1, result.Warnings.Count());
+			Assert.AreEqual(2, result.Warnings.Count());
 		}
 		//[Test]
 		public void GenerateValidSampleXmlDocument()

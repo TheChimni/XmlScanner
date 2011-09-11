@@ -46,7 +46,19 @@ namespace XmlScannerApp.Models
 
 		private void DetectWarnings(PostalAddress postalAddress, PostalAddressResult result)
 		{
-
+			foreach (var address in postalAddress.PostalAddresses)
+			{
+				string tag = null;
+				if (string.IsNullOrEmpty(address.City))
+				{
+					tag = "<city/>";
+				}			
+				if (tag != null)
+				{
+					var warning = new Warning() { Message = string.Format("The {0} tag is empty", tag), Tag = tag };
+					result.AddWarning(warning);
+				}
+			}
 		}
 
 		private void DetectErrors(PostalAddress postalAddress, PostalAddressResult result)
