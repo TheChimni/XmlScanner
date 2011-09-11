@@ -22,5 +22,19 @@ namespace XmlScannerApp.Controllers
 			return View(viewModel);
 		}
 
+		[HttpPost]
+		public ActionResult Index(IndexViewModel model)
+		{
+			var reader = new PostalAddressReader(Server.MapPath("Data"));
+			var fileNames = reader.GetFileNames();
+			var selectList = new SelectList(fileNames);
+			var viewModel = new IndexViewModel() { SampleFiles = selectList };
+			if (ModelState.IsValid)
+			{
+				var result = reader.Read(model.SelectedSampleFile);
+				viewModel.SummaryMessage = result.SummaryMessage;
+			}
+			return View(viewModel);
+		}
 	}
 }

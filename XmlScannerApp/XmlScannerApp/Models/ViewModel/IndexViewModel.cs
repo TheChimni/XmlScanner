@@ -11,5 +11,6 @@ namespace XmlScannerApp.Models.ViewModel
 	{
 		public string SelectedSampleFile { get; set; }
 		public IEnumerable<SelectListItem> SampleFiles { get; set; }
+		public string SummaryMessage { get; set; }
 	}
 }
