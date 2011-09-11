@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using AutoMapper;
 
 namespace XmlScannerApp
 {
@@ -35,6 +36,8 @@ namespace XmlScannerApp
 
 			RegisterGlobalFilters(GlobalFilters.Filters);
 			RegisterRoutes(RouteTable.Routes);
+
+			Mapper.AddProfile<WebProfile>();
 		}
 	}
 }

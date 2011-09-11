@@ -23,7 +23,7 @@ namespace XmlScannerApp.Models
 
 		public IEnumerable<string> GetFileNames()
 		{
-			return null;
+			return Directory.GetFiles(DataFolder).Select(x => x.Substring(x.LastIndexOf('\\') + 1));
 		}
 
 		public PostalAddressResult Read(string path)
