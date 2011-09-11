@@ -16,7 +16,7 @@ namespace XmlScannerApp.Tests
 		public void ReadValidPostalAddress()
 		{
 			var reader = new PostalAddressReader();
-			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressSample1.xml");
+			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressValidSample1.xml");
 			Assert.IsNotNull(result);
 			Assert.IsTrue(result.IsDocumentValid);
 		}
@@ -25,7 +25,7 @@ namespace XmlScannerApp.Tests
 		public void ReadInvalidPostalAddress()
 		{
 			var reader = new PostalAddressReader();
-			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressSample2.xml");
+			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressInvalidSample1.xml");
 			Assert.IsNotNull(result);
 			Assert.IsFalse(result.IsDocumentValid);
 		}
@@ -43,7 +43,7 @@ namespace XmlScannerApp.Tests
 			};
 
 			var serializer = new XmlSerializer(typeof(PostalAddress));
-			using (var fileStream = new FileStream(@"..\..\..\XmlScannerApp\Data\PostalAddressSample1.xml", FileMode.Create))
+			using (var fileStream = new FileStream(@"..\..\..\XmlScannerApp\Data\PostalAddressValidSample1.xml", FileMode.Create))
 			{
 				serializer.Serialize(fileStream, postalAddress);
 			}
@@ -62,7 +62,7 @@ namespace XmlScannerApp.Tests
 			};
 
 			var serializer = new XmlSerializer(typeof(PostalAddress));
-			using (var fileStream = new FileStream(@"..\..\..\XmlScannerApp\Data\PostalAddressSample2.xml", FileMode.Create))
+			using (var fileStream = new FileStream(@"..\..\..\XmlScannerApp\Data\PostalAddressInvalidSample1.xml", FileMode.Create))
 			{
 				serializer.Serialize(fileStream, postalAddress);
 			}

@@ -22,24 +22,13 @@ namespace XmlScannerApp.Models
 					var serializer = new XmlSerializer(typeof(PostalAddress));
 					try
 					{
-						while (xmlValidatingReader.Read())
-						{
-							//try
-							//{
-							//    var postalAddress = (PostalAddress)serializer.Deserialize(xmlValidatingReader);
-							//}
-							//catch
-							//{
-
-							//}
-						}
+						var postalAddress = (PostalAddress)serializer.Deserialize(xmlValidatingReader);
 					}
 					catch
 					{
 						return new PostalAddressResult() { IsDocumentValid = false };
 					}
 				}
-				//return new PostalAddressResult() { IsDocumentValid = true };
 			}
 			return new PostalAddressResult() { IsDocumentValid = true };
 		}		
