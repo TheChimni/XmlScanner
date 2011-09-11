@@ -66,6 +66,7 @@
     <Compile Include="Models\PostalAddress.cs" />
     <Compile Include="Models\PostalAddressReader.cs" />
     <Compile Include="Models\PostalAddressResult.cs" />
+    <Compile Include="Models\Warning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

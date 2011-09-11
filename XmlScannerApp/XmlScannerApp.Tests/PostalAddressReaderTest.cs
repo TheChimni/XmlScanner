@@ -58,7 +58,13 @@ namespace XmlScannerApp.Tests
 			Assert.IsTrue(result.ExceedsErrorThreshold);
 			Assert.AreEqual("Scan aborted as more than 10% of records are errored", result.SummaryMessage);
 		}
-
+		[Test]
+		public void ReadPostalAddressWithEmptyCityTag()
+		{
+			var reader = new PostalAddressReader();
+			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithCityEmpty.xml");
+			Assert.AreEqual(1, result.Warnings.Count());
+		}
 		//[Test]
 		public void GenerateValidSampleXmlDocument()
 		{

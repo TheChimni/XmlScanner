@@ -38,10 +38,15 @@ namespace XmlScannerApp.Models
 					{
 						return result;
 					}
-					// warnings
+					DetectWarnings(postalAddress, result);
 				}
 			}
 			return result;
+		}
+
+		private void DetectWarnings(PostalAddress postalAddress, PostalAddressResult result)
+		{
+
 		}
 
 		private void DetectErrors(PostalAddress postalAddress, PostalAddressResult result)
