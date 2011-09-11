@@ -31,12 +31,21 @@ namespace XmlScannerApp.Tests
 		}
 
 		[Test]
-		public void ReadPostalAddressWithEmptyAddress1AndPostCode()
+		public void ReadPostalAddressWithEmptyAddress1()
 		{
 			var reader = new PostalAddressReader();
 			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithAddress1Empty.xml");
 			Assert.AreEqual(1, result.Errors.Count());
 			Assert.AreEqual("<address1/>", result.Errors.First().Tag);
+		}
+
+		[Test]
+		public void ReadPostalAddressWithEmptyPostcode()
+		{
+			var reader = new PostalAddressReader();
+			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithPostcodeEmpty.xml");
+			Assert.AreEqual(1, result.Errors.Count());
+			Assert.AreEqual("<postcode/>", result.Errors.First().Tag);
 		}
 
 		//[Test]
