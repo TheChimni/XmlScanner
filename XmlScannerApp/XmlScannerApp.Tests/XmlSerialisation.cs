@@ -30,6 +30,14 @@ namespace XmlScannerApp.Tests
 			Assert.IsFalse(result.IsDocumentValid);
 		}
 
+		[Test]
+		public void ReadPostalAddressWithEmptyAddress1AndPostCode()
+		{
+			var reader = new PostalAddressReader();
+			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithAddress1AndPostCodeEmpty.xml");
+			Assert.IsNotEmpty(result.Errors.ToList<Error>());
+		}
+
 		//[Test]
 		public void GenerateValidSampleXmlDocument()
 		{
