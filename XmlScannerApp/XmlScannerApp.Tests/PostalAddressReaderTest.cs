@@ -12,11 +12,13 @@ namespace XmlScannerApp.Tests
 	[TestFixture]
 	public class PostalAddressReaderTest
 	{
+		private const string DataFolder = @"..\..\..\XmlScannerApp\Data\";
+
 		[Test]
 		public void ReadValidPostalAddress()
 		{
-			var reader = new PostalAddressReader();
-			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressValidSample1.xml");
+			var reader = new PostalAddressReader(DataFolder);
+			var result = reader.Read("PostalAddressValidSample1.xml");
 			Assert.IsNotNull(result);
 			Assert.IsTrue(result.IsDocumentValid);
 		}
@@ -24,8 +26,8 @@ namespace XmlScannerApp.Tests
 		[Test]
 		public void ReadInvalidPostalAddress()
 		{
-			var reader = new PostalAddressReader();
-			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressInvalidSample1.xml");
+			var reader = new PostalAddressReader(DataFolder);
+			var result = reader.Read("PostalAddressInvalidSample1.xml");
 			Assert.IsNotNull(result);
 			Assert.IsFalse(result.IsDocumentValid);
 			Assert.AreEqual("Scan Aborted as the XML document does not meet the XSD schema", result.SummaryMessage);			
@@ -34,8 +36,8 @@ namespace XmlScannerApp.Tests
 		[Test]
 		public void ReadPostalAddressWithEmptyAddress1()
 		{
-			var reader = new PostalAddressReader();
-			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithAddress1Empty.xml");
+			var reader = new PostalAddressReader(DataFolder);
+			var result = reader.Read("PostalAddressWithAddress1Empty.xml");
 			Assert.AreEqual(1, result.Errors.Count());
 			Assert.AreEqual("<address1/>", result.Errors.First().Tag);
 		}
@@ -43,8 +45,8 @@ namespace XmlScannerApp.Tests
 		[Test]
 		public void ReadPostalAddressWithEmptyPostcode()
 		{
-			var reader = new PostalAddressReader();
-			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithPostcodeEmpty.xml");
+			var reader = new PostalAddressReader(DataFolder);
+			var result = reader.Read("PostalAddressWithPostcodeEmpty.xml");
 			Assert.AreEqual(1, result.Errors.Count());
 			Assert.AreEqual("<postcode/>", result.Errors.First().Tag);
 		}
@@ -52,8 +54,8 @@ namespace XmlScannerApp.Tests
 		[Test]
 		public void AbortPostalAddressWithMorethat10PercentErrors()
 		{
-			var reader = new PostalAddressReader();
-			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithMoreThan10PercentErrors.xml");
+			var reader = new PostalAddressReader(DataFolder);
+			var result = reader.Read("PostalAddressWithMoreThan10PercentErrors.xml");
 			Assert.IsNotNullOrEmpty(result.SummaryMessage);
 			Assert.IsTrue(result.ExceedsErrorThreshold);
 			Assert.AreEqual("Scan aborted as more than 10% of records are errored", result.SummaryMessage);
@@ -62,16 +64,16 @@ namespace XmlScannerApp.Tests
 		[Test]
 		public void ReadPostalAddressWithEmptyCityTag()
 		{
-			var reader = new PostalAddressReader();
-			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithCityEmpty.xml");
+			var reader = new PostalAddressReader(DataFolder);
+			var result = reader.Read("PostalAddressWithCityEmpty.xml");
 			Assert.AreEqual(2, result.Warnings.Count());
 		}
 
 		[Test]
 		public void ReadPostalAddressWhereCountryIsNotSupported()
 		{
-			var reader = new PostalAddressReader();
-			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithUnknownCountry.xml");
+			var reader = new PostalAddressReader(DataFolder);
+			var result = reader.Read("PostalAddressWithUnknownCountry.xml");
 			Assert.AreEqual(1, result.Warnings.Count());
 			Assert.AreEqual("UK isn't within permitted set of countries", result.Warnings.First().Message);
 		}

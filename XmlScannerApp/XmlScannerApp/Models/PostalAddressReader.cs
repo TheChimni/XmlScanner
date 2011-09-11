@@ -12,14 +12,27 @@ namespace XmlScannerApp.Models
 {
 	public class PostalAddressReader
 	{
+		private const string SchemaFileName = "PostalAddress.xsd";
+		private const string DefaultCountryList = "England,France,Germany,Japan,United States";
+		private string DataFolder { get; set; }
+
+		public PostalAddressReader(string dataFolder)
+		{
+			DataFolder = dataFolder;
+		}
+
+		public IEnumerable<string> GetFileNames()
+		{
+			return null;
+		}
+
 		public PostalAddressResult Read(string path)
 		{
 			var result = new PostalAddressResult();
-			using (var xmlReader = new XmlTextReader(path))
+			using (var xmlReader = new XmlTextReader(string.Format(@"{0}\{1}", DataFolder, path)))
 			{
 				var settings = new XmlReaderSettings { ValidationType = ValidationType.Schema };
-				settings.Schemas.Add("urn:PostalAddress-schema",
-					@"C:\Users\Reeithaa\Documents\Visual Studio 2010\Projects\XMLScanner\XmlScannerApp\XmlScannerApp\Data\PostalAddress.xsd");
+				settings.Schemas.Add("urn:PostalAddress-schema", string.Format(@"{0}\{1}", DataFolder, SchemaFileName));
 				using (var xmlValidatingReader = XmlReader.Create(xmlReader, settings))
 				{
 					var serializer = new XmlSerializer(typeof(PostalAddress));
@@ -47,7 +60,7 @@ namespace XmlScannerApp.Models
 
 		private void DetectWarnings(PostalAddress postalAddress, PostalAddressResult result)
 		{
-			var countryList = ConfigurationManager.AppSettings.Get("CountryList") ?? "England,France,Germany,Japan,United States";
+			var countryList = ConfigurationManager.AppSettings.Get("CountryList") ?? DefaultCountryList;
 			var permittedCountries = countryList.Split(new[] { ',' });
 			foreach (var address in postalAddress.PostalAddresses)
 			{

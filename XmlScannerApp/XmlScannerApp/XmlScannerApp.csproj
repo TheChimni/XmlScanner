@@ -58,6 +58,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -66,6 +67,7 @@
     <Compile Include="Models\PostalAddress.cs" />
     <Compile Include="Models\PostalAddressReader.cs" />
     <Compile Include="Models\PostalAddressResult.cs" />
+    <Compile Include="Models\ViewModel\IndexViewModel.cs" />
     <Compile Include="Models\Warning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -124,7 +126,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\PostalAddress.xsd">
