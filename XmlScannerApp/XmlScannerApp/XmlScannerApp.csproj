@@ -72,6 +72,7 @@
     <Content Include="Data\PostalAddressInvalidSample1.xml" />
     <Content Include="Data\PostalAddressValidSample1.xml" />
     <Content Include="Data\PostalAddressWithAddress1Empty.xml" />
+    <Content Include="Data\PostalAddressWithMoreThan10PercentErrors.xml" />
     <Content Include="Data\PostalAddressWithPostcodeEmpty.xml" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

@@ -48,6 +48,15 @@ namespace XmlScannerApp.Tests
 			Assert.AreEqual("<postcode/>", result.Errors.First().Tag);
 		}
 
+		[Test]
+		public void AbortPostalAddressWithMorethat10PercentErrors()
+		{
+			var reader = new PostalAddressReader();
+			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithMoreThan10PercentErrors.xml");
+			Assert.IsNotNullOrEmpty(result.SummaryMessage);
+			//Assert.AreEqual("The scan is aborted as more than 10% of records are errored", result.Message);
+		}
+
 		//[Test]
 		public void GenerateValidSampleXmlDocument()
 		{
