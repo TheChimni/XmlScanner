@@ -28,6 +28,7 @@ namespace XmlScannerApp.Tests
 			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressInvalidSample1.xml");
 			Assert.IsNotNull(result);
 			Assert.IsFalse(result.IsDocumentValid);
+			Assert.AreEqual("Scan Aborted as the XML document does not meet the XSD schema", result.SummaryMessage);			
 		}
 
 		[Test]
@@ -54,7 +55,8 @@ namespace XmlScannerApp.Tests
 			var reader = new PostalAddressReader();
 			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithMoreThan10PercentErrors.xml");
 			Assert.IsNotNullOrEmpty(result.SummaryMessage);
-			//Assert.AreEqual("The scan is aborted as more than 10% of records are errored", result.Message);
+			Assert.IsTrue(result.ExceedsErrorThreshold);
+			Assert.AreEqual("Scan aborted as more than 10% of records are errored", result.SummaryMessage);
 		}
 
 		//[Test]

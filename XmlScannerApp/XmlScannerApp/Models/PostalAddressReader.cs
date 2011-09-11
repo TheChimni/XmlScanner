@@ -26,15 +26,18 @@ namespace XmlScannerApp.Models
 					try
 					{
 						postalAddress = (PostalAddress)serializer.Deserialize(xmlValidatingReader);
-						//var address1Tag =  postalAddress != null && postalAddress.PostalAddresses.Count() > 0 
-						//    ? postalAddress.PostalAddresses.each
 					}
 					catch
 					{
+						result.SummaryMessage = "Scan Aborted as the XML document does not meet the XSD schema";
 						return result;
 					}
 					result.IsDocumentValid = true;
 					DetectErrors(postalAddress, result);
+					if (result.ExceedsErrorThreshold)
+					{
+						return result;
+					}
 					// warnings
 				}
 			}
@@ -43,17 +46,29 @@ namespace XmlScannerApp.Models
 
 		private void DetectErrors(PostalAddress postalAddress, PostalAddressResult result)
 		{
+			var count = postalAddress.PostalAddresses.Count();
 			foreach (var address in postalAddress.PostalAddresses)
 			{
+				string tag = null;
 				if (string.IsNullOrEmpty(address.Address1))
 				{
-					var tag = "<address1/>";
-					result.AddError(new Error() { Message = string.Format("The {0} tag is empty", tag), Tag = tag });
+					tag = "<address1/>";
 				}
 				else if (string.IsNullOrEmpty(address.PostCode))
 				{
-					var tag = "<postcode/>";
-					result.AddError(new Error() { Message = string.Format("The {0} tag is empty", tag), Tag = tag });
+					tag = "<postcode/>";
+				}
+				
+				if (tag != null)
+				{
+					if (result.Errors.Count() > count / 10)
+					{
+						result.ExceedsErrorThreshold = true;
+						result.SummaryMessage = "Scan aborted as more than 10% of records are errored";
+						break;
+					}
+					var error = new Error() { Message = string.Format("The {0} tag is empty", tag), Tag = tag };
+					result.AddError(error);
 				}
 			}
 		}
