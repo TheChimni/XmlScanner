@@ -7,7 +7,20 @@ namespace XmlScannerApp.Models
 {
 	public class PostalAddressResult
 	{
+		IList<Error> errorList = new List<Error>(); 
+
 		public bool IsDocumentValid { get; set; }
-		public IEnumerable<Error> Errors { get; set; }
+		public IEnumerable<Error> Errors 
+		{ 
+			get 
+			{
+				return errorList; 
+			} 
+		}
+
+		public void AddError(Error error)
+		{
+			errorList.Add(error);
+		}
 	}
 }

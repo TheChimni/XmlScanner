@@ -34,7 +34,6 @@ namespace XmlScannerApp.Models
 						return result;
 					}
 					result.IsDocumentValid = true;
-					// TODO: errors
 					DetectErrors(postalAddress, result);
 					// warnings
 				}
@@ -44,6 +43,19 @@ namespace XmlScannerApp.Models
 
 		private void DetectErrors(PostalAddress postalAddress, PostalAddressResult result)
 		{
-		}		
+			foreach (var address in postalAddress.PostalAddresses)
+			{
+				if (string.IsNullOrEmpty(address.Address1))
+				{
+					var tag = "<address1/>";
+					result.AddError(new Error() { Message = string.Format("The {0} tag is empty", tag), Tag = tag });
+				}
+				else if (string.IsNullOrEmpty(address.PostCode))
+				{
+					var tag = "<postcode/>";
+					result.AddError(new Error() { Message = string.Format("The {0} tag is empty", tag), Tag = tag });
+				}
+			}
+		}
 	}
 }

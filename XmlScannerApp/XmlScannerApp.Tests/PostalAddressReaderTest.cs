@@ -10,7 +10,7 @@ using System.IO;
 namespace XmlScannerApp.Tests
 {
 	[TestFixture]
-	public class XmlSerialisation
+	public class PostalAddressReaderTest
 	{
 		[Test]
 		public void ReadValidPostalAddress()
@@ -34,8 +34,9 @@ namespace XmlScannerApp.Tests
 		public void ReadPostalAddressWithEmptyAddress1AndPostCode()
 		{
 			var reader = new PostalAddressReader();
-			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithAddress1AndPostCodeEmpty.xml");
-			Assert.IsNotEmpty(result.Errors.ToList<Error>());
+			var result = reader.Read(@"..\..\..\XmlScannerApp\Data\PostalAddressWithAddress1Empty.xml");
+			Assert.AreEqual(1, result.Errors.Count());
+			Assert.AreEqual("<address1/>", result.Errors.First().Tag);
 		}
 
 		//[Test]
