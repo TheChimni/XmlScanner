@@ -18,7 +18,7 @@ fieldset
 
 legend 
 {
-    font-size:1.2em;
+    font-size:1.4em;
     font-weight: bold;
 }
 
@@ -35,6 +35,19 @@ textarea
 .editor-field 
 {
     margin:0.5em 0 0 0;
+}
+
+.resultSummary
+{
+    font-size:1.3em;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.resultTitle
+{
+    font-size:1.2em;
+    font-weight: bold;
 }
 
 
