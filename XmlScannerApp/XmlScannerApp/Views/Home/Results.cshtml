@@ -1,4 +1,21 @@
 ﻿@model XmlScannerApp.Models.ViewModel.ResultViewModel
 <div class='result'>
+<fieldset>
+	<legend>Scan Results for @Model.FileName</legend>
 	<div class='resultSummary'>@Model.SummaryMessage</div>
+	<div class='resultErrors'>
+		<div class='resultTitle'>Errors</div>
+		@foreach (var message in Model.Errors)
+		{
+			<p>@message</p>
+		}
+	</div>
+	<div class='resultErrors'>
+		<div class='resultTitle'>Warnings</div>
+		@foreach (var message in Model.Warnings)
+		{
+			<p>@message</p>
+		}
+	</div>
+</fieldset>
 </div>

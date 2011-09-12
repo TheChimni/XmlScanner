@@ -7,6 +7,7 @@ namespace XmlScannerApp.Models.ViewModel
 {
 	public class ResultViewModel
 	{
+		public string FileName { get; set; }
 		public string SummaryMessage { get; set; }
 		public IEnumerable<string> Errors { get; set; }
 		public IEnumerable<string> Warnings { get; set; }

@@ -25,7 +25,10 @@ namespace XmlScannerApp.Controllers
 				viewModel.SelectedSampleFile = id;
 				viewModel.Result = new ResultViewModel()
 				{
-					SummaryMessage = result.SummaryMessage
+					FileName = id,
+					SummaryMessage = result.SummaryMessage,
+					Errors = result.Errors.Select(x => x.Message),
+					Warnings = result.Warnings.Select(x => x.Message)
 				};
 				//viewModel.SummaryMessage = result.SummaryMessage;
 			}
