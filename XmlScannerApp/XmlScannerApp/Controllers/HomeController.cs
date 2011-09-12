@@ -12,7 +12,6 @@ namespace XmlScannerApp.Controllers
 	{
 		//
 		// GET: /Home/
-
 		public ActionResult Index(string id)
 		{
 			var reader = new PostalAddressReader(Server.MapPath(@"~/Data"));
@@ -30,7 +29,6 @@ namespace XmlScannerApp.Controllers
 					Errors = result.Errors.Select(x => x.Message),
 					Warnings = result.Warnings.Select(x => x.Message)
 				};
-				//viewModel.SummaryMessage = result.SummaryMessage;
 			}
 			return View(viewModel);
 		}

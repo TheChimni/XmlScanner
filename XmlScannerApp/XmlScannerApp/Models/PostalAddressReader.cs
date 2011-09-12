@@ -13,20 +13,35 @@ namespace XmlScannerApp.Models
 	public class PostalAddressReader
 	{
 		private const string SchemaFileName = "PostalAddress.xsd";
+
+		//DefaultCountryList constant is used only for unit testing the code
 		private const string DefaultCountryList = "England,France,Germany,Japan,United States";
 		private const string XmlFolder = "PostalAddresses";
 		private string DataFolder { get; set; }
 
+		/// <summary>
+		/// Parameterised constructor that sets the path for the Data folder in the project
+		/// </summary>
+		/// <param name="dataFolder"></param>
 		public PostalAddressReader(string dataFolder)
 		{
 			DataFolder = dataFolder;
 		}
 
+		/// <summary>
+		/// Returns a list of all the file names in a given data folder.
+		/// </summary>
+		/// <returns>IEnumerable of strings</returns>
 		public IEnumerable<string> GetFileNames()
 		{
 			return Directory.GetFiles(string.Format(@"{0}\{1}", DataFolder, XmlFolder)).Select(x => x.Substring(x.LastIndexOf('\\') + 1));
 		}
 
+		/// <summary>
+		/// Reads a given sample XML document from the path specfied and scans it for Errors and Warnings 
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns>An instance of PostalAddressResult</returns>
 		public PostalAddressResult Read(string path)
 		{
 			var result = new PostalAddressResult();
@@ -40,6 +55,7 @@ namespace XmlScannerApp.Models
 					PostalAddress postalAddress = null;
 					try
 					{
+						// Deserialise the XML to PostalAddress
 						postalAddress = (PostalAddress)serializer.Deserialize(xmlValidatingReader);
 					}
 					catch
@@ -48,12 +64,17 @@ namespace XmlScannerApp.Models
 						return result;
 					}
 					result.IsDocumentValid = true;
+					// Detect Errors in the document
 					DetectErrors(postalAddress, result);
 					if (result.ExceedsErrorThreshold)
 					{
+						// Abort scan
 						return result;
 					}
+					// Detect Warnings in the document
 					DetectWarnings(postalAddress, result);
+
+					//Create a scan summary message for errors and warnings 
 					result.SummaryMessage = string.Format("Scan completed with {0} errors and {1} warnings",
 						result.Errors.Count(),
 						result.Warnings.Count());
@@ -62,6 +83,12 @@ namespace XmlScannerApp.Models
 			return result;
 		}
 
+
+		/// <summary>
+		/// Detects warning messages for a given XML document based on some rules
+		/// </summary>
+		/// <param name="postalAddress"></param>
+		/// <param name="result"></param>
 		private void DetectWarnings(PostalAddress postalAddress, PostalAddressResult result)
 		{
 			var countryList = ConfigurationManager.AppSettings.Get("CountryList") ?? DefaultCountryList;
@@ -93,6 +120,11 @@ namespace XmlScannerApp.Models
 			}
 		}
 
+		/// <summary>
+		/// Detects errors in an XML document during scan based on some validation rules
+		/// </summary>
+		/// <param name="postalAddress"></param>
+		/// <param name="result"></param>
 		private void DetectErrors(PostalAddress postalAddress, PostalAddressResult result)
 		{
 			var count = postalAddress.PostalAddresses.Count();
@@ -110,6 +142,7 @@ namespace XmlScannerApp.Models
 				
 				if (tag != null)
 				{
+					//Abort scan if 10% of records in the document contain errors
 					if (result.Errors.Count() > count / 10)
 					{
 						result.ExceedsErrorThreshold = true;

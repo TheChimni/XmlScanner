@@ -9,6 +9,9 @@ using System.IO;
 
 namespace XmlScannerApp.Tests
 {
+	/// <summary>
+	/// Test class that tests PostalAddressReader and PostalAddressResult
+	/// </summary>
 	[TestFixture]
 	public class PostalAddressReaderTest
 	{
