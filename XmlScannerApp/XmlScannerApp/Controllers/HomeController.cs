@@ -42,7 +42,16 @@ namespace XmlScannerApp.Controllers
 			{
 				if (Request.IsAjaxRequest())
 				{
-					// TODO: 
+					var reader = new PostalAddressReader(Server.MapPath(@"~/Data"));
+					var result = reader.Read(model.SelectedSampleFile);
+					var resultViewModel = new ResultViewModel()
+					{
+						FileName = model.SelectedSampleFile,
+						SummaryMessage = result.SummaryMessage,
+						Errors = result.Errors.Select(x => x.Message),
+						Warnings = result.Warnings.Select(x => x.Message)
+					};
+					return View("Results", resultViewModel);
 				}
 				return RedirectToAction("Index", "Home", new { id = model.SelectedSampleFile });
 			}
