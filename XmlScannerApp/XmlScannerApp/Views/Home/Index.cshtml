@@ -18,5 +18,10 @@
 		</p>
 	</fieldset>
 }
-	<p>@Model.SummaryMessage</p>
+ @{
+	 if (Model.Result != null)
+	 {
+		Html.RenderPartial("Results", Model.Result);
+	 }
+ }
 

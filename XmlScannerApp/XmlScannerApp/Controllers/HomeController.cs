@@ -23,7 +23,11 @@ namespace XmlScannerApp.Controllers
 			{
 				var result = reader.Read(id);
 				viewModel.SelectedSampleFile = id;
-				viewModel.SummaryMessage = result.SummaryMessage;
+				viewModel.Result = new ResultViewModel()
+				{
+					SummaryMessage = result.SummaryMessage
+				};
+				//viewModel.SummaryMessage = result.SummaryMessage;
 			}
 			return View(viewModel);
 		}
@@ -33,6 +37,10 @@ namespace XmlScannerApp.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				if (Request.IsAjaxRequest())
+				{
+					// TODO: 
+				}
 				return RedirectToAction("Index", "Home", new { id = model.SelectedSampleFile });
 			}
 			else
