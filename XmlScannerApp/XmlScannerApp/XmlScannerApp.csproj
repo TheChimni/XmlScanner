@@ -76,13 +76,13 @@
     <Compile Include="WebProfile.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\PostalAddressInvalidSample1.xml" />
-    <Content Include="Data\PostalAddressValidSample1.xml" />
-    <Content Include="Data\PostalAddressWithAddress1Empty.xml" />
-    <Content Include="Data\PostalAddressWithCityEmpty.xml" />
-    <Content Include="Data\PostalAddressWithMoreThan10PercentErrors.xml" />
-    <Content Include="Data\PostalAddressWithPostcodeEmpty.xml" />
-    <Content Include="Data\PostalAddressWithUnknownCountry.xml" />
+    <Content Include="Data\PostalAddresses\PostalAddressInvalidSample1.xml" />
+    <Content Include="Data\PostalAddresses\PostalAddressValidSample1.xml" />
+    <Content Include="Data\PostalAddresses\PostalAddressWithAddress1Empty.xml" />
+    <Content Include="Data\PostalAddresses\PostalAddressWithCityEmpty.xml" />
+    <Content Include="Data\PostalAddresses\PostalAddressWithMoreThan10PercentErrors.xml" />
+    <Content Include="Data\PostalAddresses\PostalAddressWithPostcodeEmpty.xml" />
+    <Content Include="Data\PostalAddresses\PostalAddressWithUnknownCountry.xml" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\jquery-ui.css" />
@@ -129,7 +129,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Data\WebAddresses\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Data\PostalAddress.xsd">
       <SubType>Designer</SubType>
