@@ -58,7 +58,7 @@ namespace XmlScannerApp.Tests
 			var result = reader.Read("PostalAddressWithMoreThan10PercentErrors.xml");
 			Assert.IsNotNullOrEmpty(result.SummaryMessage);
 			Assert.IsTrue(result.ExceedsErrorThreshold);
-			Assert.AreEqual("Scan aborted as more than 10% of records are errored", result.SummaryMessage);
+			Assert.AreEqual("Scan aborted as more than 10% of records contained errors", result.SummaryMessage);
 		}
 
 		[Test]

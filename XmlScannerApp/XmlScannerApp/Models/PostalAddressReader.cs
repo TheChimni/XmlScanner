@@ -54,6 +54,9 @@ namespace XmlScannerApp.Models
 						return result;
 					}
 					DetectWarnings(postalAddress, result);
+					result.SummaryMessage = string.Format("Scan completed with {0} errors and {1} warnings",
+						result.Errors.Count(),
+						result.Warnings.Count());
 				}
 			}
 			return result;
@@ -110,7 +113,7 @@ namespace XmlScannerApp.Models
 					if (result.Errors.Count() > count / 10)
 					{
 						result.ExceedsErrorThreshold = true;
-						result.SummaryMessage = "Scan aborted as more than 10% of records are errored";
+						result.SummaryMessage = "Scan aborted as more than 10% of records contained errors";
 						break;
 					}
 					var error = new Error() { Message = string.Format("The {0} tag is empty", tag), Tag = tag };
