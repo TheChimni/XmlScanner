@@ -81,6 +81,8 @@ namespace XmlScannerApp.Tests
 			Assert.AreEqual("UK isn't within permitted set of countries", result.Warnings.First().Message);
 		}
 
+
+		// Temporary method to generate test data.
 		//[Test]
 		public void GenerateValidSampleXmlDocument()
 		{
@@ -100,6 +102,7 @@ namespace XmlScannerApp.Tests
 			}
 		}
 
+		//Temporary method to generate test data.
 		//[Test]
 		public void GenerateInValidSampleXmlDocumentDoesNotMatchXsd()
 		{
