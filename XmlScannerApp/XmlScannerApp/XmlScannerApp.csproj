@@ -73,6 +73,7 @@
     <Compile Include="Models\ViewModel\IndexViewModel.cs" />
     <Compile Include="Models\ViewModel\ResultViewModel.cs" />
     <Compile Include="Models\Warning.cs" />
+    <Compile Include="Models\WebAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebProfile.cs" />
   </ItemGroup>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<WebAddress xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:WebAddress-schema">
+  <WebAddressRow>
+    <url>https://github.com/</url>
+    <description>A hub for gits :)</description>
+    <favicon>Some icon</favicon>
+    <tags>Git Hub tags</tags>
+  </WebAddressRow>
+  <WebAddressRow>
+    <url>https://stackoverflow.com/</url>
+    <description>Test your skills</description>
+    <favicon>Some icon</favicon>
+    <tags>stack overflow tags</tags>
+  </WebAddressRow>
+</WebAddress>
